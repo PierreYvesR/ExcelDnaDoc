@@ -34,16 +34,12 @@
         <div class="span9" id="main">
           
 <h1>ExcelDnaDoc - Excel-DNA Help file Generator</h1>
-
 <p>ExcelDnaDoc is a command-line utility to create a compiled HTML Help Workshop file (.chm) for ExcelDna.</p>
-
 <ul>
 <li>single help file created even if multiple library are specified in the "dna" file.</li>
 <li>can use customized templates and content</li>
 </ul>
-
 <p>Use the <a href="https://github.com/mndrake/ExcelDnaDoc/issues">issues log</a> to report any issues or give feedback for future enhancements.</p>
-
 <div class="row">
   <div class="span1"></div>
   <div class="span6">
@@ -54,27 +50,19 @@
   </div>
   <div class="span1"></div>
 </div>
-
 <p>Alternatively, you can download the <a href="https://github.com/mndrake/ExcelDnaDoc/zipball/master">source as a ZIP file</a> or download 
 the <a href="https://github.com/mndrake/ExcelDnaDoc/zipball/release">compiled binaries</a> as a ZIP.</p>  
-
 <p>To build a compiled help file (.chm) the <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms669985(v=vs.85).aspx">HTML Help Workshop</a> (HHW) must be installed.
-ExcelDnaDoc expects HHW to be installed at <code>C:\Program Files (x86)\HTML Help Workshop\</code>. 
-If it is installed at another location change <code>packages/ExcelDnaDoc/tools/ExcelDnaDoc.exe.config</code> 
+ExcelDnaDoc expects HHW to be installed at <code>C:\Program Files (x86)\HTML Help Workshop\</code>.
+If it is installed at another location change <code>packages/ExcelDnaDoc/tools/ExcelDnaDoc.exe.config</code>
 to reference the proper directory before compiling your project.</p>
-
-<p>When installed from NuGet it will edit the default .dna file installed by Excel-DNA and adds post 
+<p>When installed from NuGet it will edit the default .dna file installed by Excel-DNA and adds post
 build steps to build the .chm documentation file whenever the project is build.</p>
-
 <h2>Notes</h2>
-
-<p>Uses the <code>ExcelFunction</code>, <code>ExcelArgument</code>, and <code>ExcelCommand</code> attributes in Excel-DNA to build 
+<p>Uses the <code>ExcelFunction</code>, <code>ExcelArgument</code>, and <code>ExcelCommand</code> attributes in Excel-DNA to build
 documentation for your Excel-DNA add-in.</p>
-
 <p>The following fields are can be used to create documentation :</p>
-
 <h3><em>ExcelFunction Attribute</em></h3>
-
 <table>
 <thead>
 <tr class="header">
@@ -102,9 +90,7 @@ documentation for your Excel-DNA add-in.</p>
 </tbody>
 </table>
 
-
 <h3><em>ExcelArgument Attribute</em></h3>
-
 <table>
 <thead>
 <tr class="header">
@@ -124,9 +110,7 @@ documentation for your Excel-DNA add-in.</p>
 </tbody>
 </table>
 
-
 <h3><em>ExcelCommand Attribute</em></h3>
-
 <table>
 <thead>
 <tr class="header">
@@ -154,13 +138,10 @@ documentation for your Excel-DNA add-in.</p>
 </tbody>
 </table>
 
-
-<p>If ExcelDna.Documentation is included as a reference (default in NuGet package) then an additional 
-attribute <code>ExcelFunctionDoc</code> is available as a replacement to the <code>ExcelFunction</code> attribute 
+<p>If ExcelDna.Documentation is included as a reference (default in NuGet package) then an additional
+attribute <code>ExcelFunctionDoc</code> is available as a replacement to the <code>ExcelFunction</code> attribute
 which includes additional fields that can be used for additional documentation.</p>
-
 <h3><em>ExcelFunctionDoc Attribute</em></h3>
-
 <table>
 <thead>
 <tr class="header">
@@ -200,13 +181,9 @@ which includes additional fields that can be used for additional documentation.<
 </tbody>
 </table>
 
-
 <h2>Example</h2>
-
 <p><strong>F#</strong></p>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l"> 1: </span>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
 <span class="l"> 2: </span>
 <span class="l"> 3: </span>
 <span class="l"> 4: </span>
@@ -224,42 +201,56 @@ which includes additional fields that can be used for additional documentation.<
 <span class="l">16: </span>
 <span class="l">17: </span>
 <span class="l">18: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="k">namespace</span> <span class="i">DocTest</span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">namespace</span> <span class="i">DocTest</span>
 <span class="k">open</span> <span class="i">ExcelDna</span><span class="o">.</span><span class="i">Integration</span>
 <span class="k">open</span> <span class="i">ExcelDna</span><span class="o">.</span><span class="i">Documentation</span>
 
 <span class="k">module</span> <span class="i">Math</span> <span class="o">=</span>
 
-    [&lt;<span class="i">ExcelFunctionDoc</span>( <span class="i">Name</span> <span class="o">=</span> <span class="s">&quot;</span><span class="s">Math</span><span class="s">.</span><span class="s">AddThem</span><span class="s">&quot;</span>, <span class="i">Category</span> <span class="o">=</span> <span class="s">&quot;</span><span class="s">Math</span><span class="s">&quot;</span>, 
-                        <span class="i">Description</span> <span class="o">=</span> <span class="s">&quot;</span><span class="s">adds</span><span class="s"> </span><span class="s">two</span><span class="s"> </span><span class="s">numbers</span><span class="s">&quot;</span>, 
-                        <span class="i">HelpTopic</span> <span class="o">=</span> <span class="s">&quot;</span><span class="s">DocTest</span><span class="s">-</span><span class="s">AddIn</span><span class="s">.</span><span class="s">chm</span><span class="s">!</span><span class="s">1001</span><span class="s">&quot;</span>,
-                        <span class="i">Summary</span> <span class="o">=</span> <span class="s">&quot;</span><span class="s">really</span><span class="s"> </span><span class="s">all</span><span class="s"> </span><span class="s">it</span><span class="s"> </span><span class="s">does</span><span class="s"> </span><span class="s">is</span><span class="s"> </span><span class="s">add</span><span class="s"> </span><span class="s">two</span><span class="s"> </span><span class="s">number</span><span class="s"> </span><span class="s">.</span><span class="s">.</span><span class="s">.</span><span class="s"> </span><span class="s">I</span><span class="s"> </span><span class="s">promise</span><span class="s">.</span><span class="s">&quot;</span>,
-                        <span class="i">Returns</span> <span class="o">=</span> <span class="s">&quot;</span><span class="s">the</span><span class="s"> </span><span class="s">sum</span><span class="s"> </span><span class="s">of</span><span class="s"> </span><span class="s">the</span><span class="s"> </span><span class="s">two</span><span class="s"> </span><span class="s">arguments</span><span class="s">&quot;</span>)&gt;]
+    [&lt;<span class="i">ExcelFunctionDoc</span>( <span class="i">Name</span> <span class="o">=</span> <span class="s">&quot;Math.AddThem&quot;</span>, <span class="i">Category</span> <span class="o">=</span> <span class="s">&quot;Math&quot;</span>, 
+                        <span class="i">Description</span> <span class="o">=</span> <span class="s">&quot;adds two numbers&quot;</span>, 
+                        <span class="i">HelpTopic</span> <span class="o">=</span> <span class="s">&quot;DocTest-AddIn.chm!1001&quot;</span>,
+                        <span class="i">Summary</span> <span class="o">=</span> <span class="s">&quot;really all it does is add two number ... I promise.&quot;</span>,
+                        <span class="i">Returns</span> <span class="o">=</span> <span class="s">&quot;the sum of the two arguments&quot;</span>)&gt;]
     <span class="k">let</span> <span class="i">addThem</span>
         (
-            [&lt;<span class="i">ExcelArgument</span>(<span class="i">Name</span> <span class="o">=</span> <span class="s">&quot;</span><span class="s">Arg1</span><span class="s">&quot;</span>, <span class="i">Description</span> <span class="o">=</span> <span class="s">&quot;</span><span class="s">the</span><span class="s"> </span><span class="s">first</span><span class="s"> </span><span class="s">argument</span><span class="s">&quot;</span>)&gt;]<span class="i">a</span>,
-            [&lt;<span class="i">ExcelArgument</span>(<span class="i">Name</span> <span class="o">=</span> <span class="s">&quot;</span><span class="s">Arg2</span><span class="s">&quot;</span>, <span class="i">Description</span> <span class="o">=</span> <span class="s">&quot;</span><span class="s">the</span><span class="s"> </span><span class="s">second</span><span class="s"> </span><span class="s">argument</span><span class="s">&quot;</span>)&gt;]<span class="i">b</span>
+            [&lt;<span class="i">ExcelArgument</span>(<span class="i">Name</span> <span class="o">=</span> <span class="s">&quot;Arg1&quot;</span>, <span class="i">Description</span> <span class="o">=</span> <span class="s">&quot;the first argument&quot;</span>)&gt;]<span class="i">a</span>,
+            [&lt;<span class="i">ExcelArgument</span>(<span class="i">Name</span> <span class="o">=</span> <span class="s">&quot;Arg2&quot;</span>, <span class="i">Description</span> <span class="o">=</span> <span class="s">&quot;the second argument&quot;</span>)&gt;]<span class="i">b</span>
         ) <span class="o">=</span> 
-
-        <span class="i">a</span><span class="o">+</span><span class="i">b</span></pre>
-</td>
+    
+        <span class="i">a</span><span class="o">+</span><span class="i">b</span>
+</code></pre></td>
 </tr>
 </table>
-
 <p><strong>C#</strong></p>
-
-<pre lang="csharp"><span class="k">namespace</span> DocTest
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="csharp"><span class="k">namespace</span> DocTest
 {
     <span class="k">using</span> ExcelDna.Integration;
 
     <span class="k">public</span> <span class="k">class</span> Text 
     {
-        [ExcelFunction( Name = <span class="s">"Text.ConcatThem"</span>, 
-                        Description = <span class="s">"concatenates two strings"</span>, 
-                        HelpTopic = <span class="s">"DocTest-AddIn.chm!1002"</span>)]
+        [ExcelFunction( Name <span class="o">=</span> <span class="s">"Text.ConcatThem"</span>, 
+                        Description <span class="o">=</span> <span class="s">"concatenates two strings"</span>, 
+                        HelpTopic <span class="o">=</span> <span class="s">"DocTest-AddIn.chm!1002"</span>)]
         <span class="k">public</span> <span class="k">static</span> <span class="k">object</span> ConcatThem(
             [ExcelArgument(Description=<span class="s">"the first string"</span>)] <span class="k">object</span> a, 
             [ExcelArgument(Description=<span class="s">"the second string"</span>)] <span class="k">object</span> b)
@@ -267,47 +258,34 @@ which includes additional fields that can be used for additional documentation.<
             <span class="k">return</span> <span class="k">string</span>.Concat(a.ToString(), b.ToString());
         }
     }
-}</pre>
-
+}
+</code></pre></td></tr></table>
 <h2>Command Line Usage</h2>
-
-<table class="pre"><tr><td class="lines"><pre class="fssnip">
-<span class="l">1: </span>
-</pre>
-</td>
-<td class="snippet"><pre class="fssnip">
-<span class="i">ExcelDnaDoc</span><span class="o">.</span><span class="i">exe</span> <span class="i">dnaPath</span>  </pre>
-</td>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="i">ExcelDnaDoc</span><span class="o">.</span><span class="i">exe</span> <span class="i">dnaPath</span>  
+</code></pre></td>
 </tr>
 </table>
-
 <p><code>dnaPath</code> The path to the primary .dna file for the ExcelDna add-in.</p>
-
 <p>Example: <code>ExcelDnaDoc.exe &lt;build folder&gt;\SampleLib-AddIn.dna</code><br />
-         The HTML Help Workshop content will be created in <code>&lt;build folder&gt;\HelpContent\</code>.</p>
-
+The HTML Help Workshop content will be created in <code>&lt;build folder&gt;\HelpContent\</code>.</p>
 <p>External libraries will be searched for UDFs and Commands
 that are exposed to Excel and documented using the ExcelFunctionAttribute and the ExcelArgumentAttribute.</p>
-
-<p>If The ExcelDna.Documentation library has been referenced then the ExcelFunctionDocAttribute 
-is also available to include additional documentation fields that will not be exposed in the Excel Function 
+<p>If The ExcelDna.Documentation library has been referenced then the ExcelFunctionDocAttribute
+is also available to include additional documentation fields that will not be exposed in the Excel Function
 Wizard, but will be included in the HTML Help Workshop content.</p>
-
 <h2>This Project Uses</h2>
-
 <p><a href="http://exceldna.codeplex.com/">Excel-DNA</a><br />
- <a href="http://fsharp.github.io/FAKE/">FAKE (F# MAKE)</a><br />
- <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms669985(v=vs.85).aspx">HTML Help Workshop </a><br />
- <a href="http://nuget.codeplex.com/">NuGet Package Manager</a><br />
- <a href="https://github.com/Antaris/RazorEngine">RazorEngine</a></p>
-
+<a href="http://fsharp.github.io/FAKE/">FAKE (F# MAKE)</a><br />
+<a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms669985(v=vs.85).aspx">HTML Help Workshop </a><br />
+<a href="http://nuget.codeplex.com/">NuGet Package Manager</a><br />
+<a href="https://github.com/Antaris/RazorEngine">RazorEngine</a></p>
 <h2>Contributing and copyright</h2>
-
-<p>The project is hosted on <a href="https://github.com/mndrake/ExcelDnaDoc">GitHub</a> where you can <a href="https://github.com/mndrake/ExcelDnaDoc/issues">report issues</a>, fork 
+<p>The project is hosted on <a href="https://github.com/mndrake/ExcelDnaDoc">GitHub</a> where you can <a href="https://github.com/mndrake/ExcelDnaDoc/issues">report issues</a>, fork
 the project and submit pull requests.</p>
-
-<p>The library is available under the MIT license, which allows modification and 
-redistribution for both commercial and non-commercial purposes. For more information see the 
+<p>The library is available under the MIT license, which allows modification and
+redistribution for both commercial and non-commercial purposes. For more information see the
 <a href="https://github.com/mndrake/ExcelDnaDoc/blob/master/LICENSE.txt">License file</a> in the GitHub repository.</p>
 
 
